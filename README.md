@@ -1,0 +1,2 @@
+# ogcmap
+Example for chartmaps
