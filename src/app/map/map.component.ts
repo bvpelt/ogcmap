@@ -24,6 +24,9 @@ export class MapComponent {
     this.initializeMap();
   }
 
+  /*
+  the default projection is Spherical Mercator (EPSG:3857), with meters as map units
+  */
   private initializeMap(): void {
     this.map = new Map({
       target: 'map',
