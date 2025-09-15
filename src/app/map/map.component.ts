@@ -102,9 +102,12 @@ export class MapComponent implements OnInit, OnDestroy {
           }),
         ],
         view: new View({
-          center: fromLonLat([155000, 463000]), // Center on Netherlands
-          zoom: 7,
-          projection: "EPSG:28992", // Start with Web Mercator, switch later
+          projection: "EPSG:28992",
+          center: [155000, 463000], // Center of Netherlands in RD coordinates
+          zoom: 3,
+          minZoom: 0,
+          maxZoom: 19,
+          extent: [-285401.92, 22598.08, 595401.92, 903401.92],
         }),
       });
 
@@ -112,7 +115,7 @@ export class MapComponent implements OnInit, OnDestroy {
       await this.addPdokBrtLayer();
 
       // Switch to RD New projection for better PDOK integration
-      this.switchToRDNewProjection();
+      //this.switchToRDNewProjection();
 
       console.log("Map initialization completed");
     } catch (error) {
