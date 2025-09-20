@@ -17,6 +17,8 @@ import { FeatureLike } from "ol/Feature";
 
 // Example with ol-mapbox-style
 import { applyStyle } from "ol-mapbox-style";
+import { LayersComponent } from "../layers/layers.component";
+import { TileMatrixSet, TileMatrix, OGCCollection } from "./map.interface";
 
 // Register RD New projection for Netherlands
 proj4.defs(
@@ -25,6 +27,7 @@ proj4.defs(
 );
 register(proj4);
 
+/*
 interface TileMatrixSet {
   id: string;
   title?: string;
@@ -51,10 +54,13 @@ interface OGCCollection {
     type?: string;
   }>;
 }
+*/
+
+
 
 @Component({
   selector: "app-map",
-  imports: [],
+  imports: [LayersComponent],
   templateUrl: "./map.component.html",
   styleUrl: "./map.component.css",
 })
@@ -71,11 +77,27 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private brtLayer: VectorTileLayer | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     console.log("MapComponent start initialization");
     this.initializeMap();
+    /*
+
+    // Add a layer
+const newLayer = new TileLayer({...});
+newLayer.set('name', 'My Layer');
+this.layersComponent.addLayer(newLayer);
+
+// Find and use a layer
+const layer = this.layersComponent.findLayerByName('My Layer');
+if (layer) {
+  layer.setVisible(false);
+}
+  
+    */
   }
 
   ngOnDestroy(): void {

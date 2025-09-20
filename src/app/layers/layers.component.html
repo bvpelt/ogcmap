@@ -1,0 +1,36 @@
+<div class="layers-container">
+  <div class="layers-header">
+    <h3>Map Layers ({{ getLayerCount() }})</h3>
+  </div>
+  
+  <div class="layers-list">
+    @if (getLayerCount() === 0) {
+      <p>No layers available</p>
+    } @else {
+      @for (layerInfo of getLayerInfo(); track layerInfo.layer) {
+        <div class="layer-item">
+          <input 
+            type="checkbox" 
+            class="layer-checkbox"
+            [checked]="layerInfo.visible"
+            (change)="onLayerVisibilityChange(layerInfo.name, $event)">
+          <span class="layer-name">{{ layerInfo.name }}</span>
+          <span class="layer-type">{{ layerInfo.type }}</span>
+          <span class="layer-projection">{{ layerInfo.projection }}</span>
+        </div>
+      }
+    }
+    
+    @if (rdLayers().length > 0) {
+      <div class="layers-header">
+        <h4>RD New Layers ({{ rdLayers().length }})</h4>
+      </div>
+      @for (layer of rdLayers(); track layer) {
+        <div class="layer-item">
+          <span class="layer-name">{{ layer.get('name') || 'Unnamed RD Layer' }}</span>
+          <span class="layer-projection">EPSG:28992</span>
+        </div>
+      }
+    }
+  </div>
+</div>

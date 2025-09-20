@@ -1,40 +1,69 @@
+/* Remove conflicting global styles */
 html,
 body {
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-#map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.map {
-/*  
-  width: 100%;
-  height: 500px;  Adjust height as needed 
-  border: 1px solid #ccc;
-  border-radius: 4px;
-*/
-}
-
-/* Optional: Add loading indicator */
-.map-loading {
+/* Main container for 50/50 split */
+.app-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 500px;
-  background-color: #f5f5f5;
-  color: #666;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
 }
 
-/* Optional: Map controls styling */
+/* Left panel - 50% width */
+.layers-panel {
+  width: 50%; /* Changed from 300px to 50% */
+  background-color: #f5f5f5;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Right panel - 50% width */
+.map-container {
+  width: 50%; /* Explicit 50% instead of flex: 1 */
+  position: relative;
+  height: 100vh;
+}
+
+/* Map styling - REMOVED position: absolute */
+#map,
+.map {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* Removed position: absolute, top, bottom - these were breaking the layout */
+}
+
+/* OpenLayers control styling */
 .ol-control {
   background-color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .ol-control:hover {
   background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Optional: Map loading indicator */
+.map-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #f5f5f5;
+  color: #666;
+}
+
+/* Ensure all elements use border-box sizing */
+* {
+  box-sizing: border-box;
 }
